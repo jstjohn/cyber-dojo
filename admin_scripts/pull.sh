@@ -1,7 +1,9 @@
 #!/bin/bash
 # Use to install the latest cyber-dojo git repo onto a cyber-dojo server
 
+cd /var/www
 cyberDojoHome=/var/www/cyber-dojo
+git clone https://github.com/jstjohn/cyber-dojo
 cd $cyberDojoHome
 
 # get latest source from https://github.com/JonJagger/cyber-dojo
