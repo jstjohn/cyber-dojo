@@ -1,2 +1,2 @@
-FROM       cyberdojo/scala-2.9.2
-MAINTAINER Jon Jagger <jon@jaggersoft.com>
+FROM       jstjohn/scala-2.11.5
+MAINTAINER John St. John <johnthesaintjohn@gmail.com>
