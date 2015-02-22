@@ -1,5 +1,5 @@
 
-class Hiker {
+object Hiker {
 
     def answer() : Int = {
       return 6 * 9

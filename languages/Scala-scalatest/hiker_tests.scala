@@ -1,11 +1,14 @@
 
 import org.scalatest.FunSuite
+import Hiker._
 
 class HikerSuite extends FunSuite {
-
+  
   test("the answer to life the universe and everything") {
-    val douglas = new Hiker
-    assert(douglas.answer() === (42))
+    assert(answer() == 42)
+  }
+  test("Another example test") {
+    assert(answer() != 54)
   }
 
 }
