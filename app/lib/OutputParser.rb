@@ -242,8 +242,11 @@ module OutputParser
 
   def self.parse_scala_test(output)
     #Tests: succeeded 0, failed 1, canceled 0, ignored 0, pending 0
+    scala_error = /.*\s+error:\s+.*/
     scala_pattern = /Tests: succeeded (\d+), failed (\d+), canceled (\d+), ignored (\d+), pending (\d+)/
-    if scala_pattern.match(output)
+    if scala_error.match(output)
+      :amber
+    elsif scala_pattern.match(output)
       $2 == "0" ? :green : :red
     else
       :amber
