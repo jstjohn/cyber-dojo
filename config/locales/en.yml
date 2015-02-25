@@ -1,3 +1,8 @@
+alligator buffalo cheetah deer
+          elephant frog gorilla hippo iguana jaguar
+          koala lion moose narwhal opposum panda quail
+          raccoon snake trex unicorn vulture wolf xraytetra yak zebra
+
 en:
   views:      
     avatars:
@@ -9,13 +14,23 @@ en:
       frog: "frog"
       gorilla: "gorilla"
       hippo: "hippo"
+      iguana: "iguana"
+      jaguar: "jaguar"
       koala: "koala"
       lion: "lion"
       moose: "moose"
+      narwhal: "narwhal"
+      opposum: "opposum"
       panda: "panda"
+      quail: "quail"
       raccoon: "raccoon"
       snake: "snake"
+      trex: "trex"
+      unicorn: "unicorn"
+      vulture: "vulture"
       wolf: "wolf"
+      xraytetra: "x-ray tetra"
+      yak: "yak"
       zebra: "zebra"
       
     labels:
