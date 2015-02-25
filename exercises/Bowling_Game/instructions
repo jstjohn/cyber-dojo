@@ -1,4 +1,7 @@
-Write a program, to score a game of Ten-Pin Bowling.
+Write a program to score a game of Ten-Pin Bowling.
+
+Input: string (described below) representing a bowling game
+Ouput: integer score
 
 The scoring rules:
 
@@ -22,13 +25,11 @@ If, after both balls, there is still at least one of the
 ten pins standing the score for that frame is simply
 the total number of pins knocked down in those two balls.
 
-If you get a spare in the last (10th) frame you get one 
-more bonus ball. If you get a strike in the last (10th) 
-frame you get two more bonus balls.
-These bonus throws are taken as part of the same turn. 
-If a bonus ball knocks down all the pins, the process 
-does not repeat. The bonus balls are only used to 
-calculate the score of the final frame.
+If you get a spare in the last (10th) frame you get one more
+bonus ball. If you get a strike in the last (10th) frame you
+get two more bonus balls. The bonus balls are only used to
+calculate the score of the final frame and are not scored in
+a separate frame.
 
 The game score is the total of all frame scores.
 
@@ -38,6 +39,7 @@ X indicates a strike
 / indicates a spare
 - indicates a miss
 | indicates a frame boundary
+The characters after the || indicate bonus balls
 
 X|X|X|X|X|X|X|X|X|X||XX
 Ten strikes on the first ball of all ten frames.
@@ -62,6 +64,5 @@ Score for each frame == 10 + score for next one
 ball == 10 + 5 == 15
 Total score == 10 frames x 15 == 150
 
-
-
-
+X|7/|9-|X|-8|8/|-6|X|X|X||81
+Total score == 167
