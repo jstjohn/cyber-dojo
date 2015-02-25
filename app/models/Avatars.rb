@@ -4,9 +4,9 @@ class Avatars
   def self.names
       %w(
           alligator buffalo cheetah deer
-          elephant frog gorilla hippo
-          koala lion moose panda
-          raccoon snake wolf zebra
+          elephant frog gorilla hippo iguana jaguar
+          koala lion moose narwhal opposum panda quail
+          raccoon snake trex unicorn vulture wolf xraytetra yak zebra
         )
   end
 

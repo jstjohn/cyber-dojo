@@ -5,10 +5,10 @@ require './script_lib' # for index()
 
 def avatars
   %w(
-      alligator buffalo cheetah deer
-      elephant frog gorilla hippo
-      koala lion moose panda
-      raccoon snake wolf zebra
+          alligator buffalo cheetah deer
+          elephant frog gorilla hippo iguana jaguar
+          koala lion moose narwhal opposum panda quail
+          raccoon snake trex unicorn vulture wolf xraytetra yak zebra
     )
 end
 
