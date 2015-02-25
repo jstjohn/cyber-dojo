@@ -21,6 +21,7 @@ cyberDojo.db
 *.class
 
 test/cyberdojo/*
+test/cyber-dojo/katas/*
 
 admin_scripts/exceptions.log
 

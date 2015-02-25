@@ -7,7 +7,6 @@ require_relative root + '/test/test_coverage'
 require_relative root + '/test/all'
 require_relative root + '/config/environment'
 require 'minitest/autorun'
-require 'rails/test_help'
 
 class ControllerTestBase < ActionDispatch::IntegrationTest
 
@@ -25,8 +24,7 @@ class ControllerTestBase < ActionDispatch::IntegrationTest
     reset_external(:runner, HostTestRunner.new)
     reset_external(:exercises_path, root_path + '/exercises/')
     reset_external(:languages_path, root_path + '/languages/')
-    reset_external(:katas_path, root_path + '/test/cyberdojo/katas/')
-    `rm -rf #{Dojo.new.katas.path}*`
+    reset_external(:katas_path, root_path + '/test/cyber-dojo/katas/')
   end
 
   # - - - - - - - - - - - - - - - - - - - - - - - -

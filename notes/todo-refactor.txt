@@ -1,13 +1,25 @@
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Work towards removing dir as common first argument to all
-Git methods. 
-app/models/Tag.rb  has this
-  def diff(m)
-    ...
-    diff_lines = git.diff(@avatar.path, command)
-  end
-which means I have to leave git as public in ExternalGit
+Dojo.rb Katas.rb Kata.rb
+These are poorly named. Should have been
+Dojo.rb -> CyberDojo.rb
+Katas.rb -> Dojos.rb
+Kata.rb -> Dojo.rb
+Also Exercses.rb -> Katas.rb
+  and Exercise.rb -> Kata.rb
+and cyber-dojo/katas/  -> cyber-dojo/dojos
+Is the latter too big a change to make?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Can't run the tests on the Macbook pro (but can run a rails server).
+Write a script to edit the rights of the cyber-dojo folder
+(chown/chmod/sefacl). Run this from pull.sh?
+I think this is also causing one of the steps when setting
+up a digital-ocean server to appear to fail.
+Might be worth trying to automate adding the current user
+to the www-data group.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+line 30 of pull.sh should name the admin_scripts folder
+so it has chown -R run on it.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Rename Runner to TestRunner
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -30,6 +42,13 @@ Kata.start_avatar
   to ensure you don't get two avatars with the same name.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 200 clones of cyber-dojo yesterday!
+But not really because cyber-dojo docker index auto-build inflates 
+that figure.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Make cyber-dojo free again. Smaller areas on left side but
+with larger font button text that opens a dialog which
+contains suggested amounts and a donate link
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 How about making cyber-dojo 'follow-ware'
 I ask users to follow me on twitter?!
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -51,8 +70,6 @@ Light.rb colour() method can adapt old entries.
 history-diff dialog scrolling rightmost top-bar traffic-light
 into view could be better. Show a few traffic-lights to its
 right as well.
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-history-diff title-bar does not align correctly in Firefox.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 all-animals traffic-light-count code should be in a helper
 not directly in the erb file.

@@ -8,26 +8,28 @@ class Tag
   end
 
   def visible_files
-    @manifest ||= JSON.parse(git.show(@avatar.path, "#{@n}:manifest.json"))
+    @manifest ||= JSON.parse(git(:show, "#{@n}:manifest.json"))
   end
 
   def output
-    # tag 0's manifest (start_avatar commit)
-    # does not have an output file
     visible_files['output'] || ''
-  end
-
-  def diff(m)
-    command = "--ignore-space-at-eol --find-copies-harder #{@n} #{m} sandbox"
-    diff_lines = git.diff(@avatar.path, command)
-    visible_files = @avatar.tags[m].visible_files
-    git_diff(diff_lines, visible_files)
   end
 
 private
 
+  def path
+    @avatar.path
+  end
+
   include ExternalDiskDir
   include ExternalGit
-  include GitDiff
 
 end
+
+#------------------------------------------
+# output
+#------------------------------------------
+# In very early dojos avatar.create_kata()
+# did not save 'output' in visible_files
+#------------------------------------------
+

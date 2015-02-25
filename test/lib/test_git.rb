@@ -26,8 +26,11 @@ class GitTests < LibTestBase
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   test 'git init' do
-    expected = "Initialized empty Git repository in #{@dir}.git/\n"
-    assert_equal expected, @git.init(@dir, '')
+    message = @git.init(@dir, '')
+    assert message.end_with?("empty Git repository in #{@dir}.git/\n")
+    uk_git_init_message = message.start_with?("Initialised");
+    us_git_init_message = message.start_with?("Initialized");
+    assert uk_git_init_message || us_git_init_message
   end
 
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -109,6 +112,7 @@ class GitTests < LibTestBase
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   test 'git config' do
+    @git.init(@dir, '')
     cfg = @git.config(@dir, 'user.name Fred Flintsone')
     assert_equal 0, $?.exitstatus
     assert_equal '', cfg
@@ -117,6 +121,7 @@ class GitTests < LibTestBase
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   test 'git gc' do
+    @git.init(@dir, '')
     gc = @git.gc(@dir, '--auto --quiet')
     assert_equal 0, $?.exitstatus
     assert_equal '', gc
@@ -125,6 +130,7 @@ class GitTests < LibTestBase
   #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   test 'git bad-command logging' do
+    @git.init(@dir, '')
     gc = @git.gc(@dir, '--automatic')
     assert_not_equal 0, $?.exitstatus
     assert gc.start_with?('error: unknown option')

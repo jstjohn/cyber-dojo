@@ -9,7 +9,7 @@ class TagsTest < ModelTestBase
     kata = make_kata
     avatar = kata.start_avatar
     tags = avatar.tags
-    assert_equal 1, tags.count
+    assert_equal 1, tags.length
 
     n = 0
     tags.each { n += 1 }
@@ -43,7 +43,7 @@ class TagsTest < ModelTestBase
     fake_three_tests(lion)
 
     tags = lion.tags
-    assert_equal 4, tags.count
+    assert_equal 4, tags.length
     assert tags.all?{|tag| tag.class.name === 'Tag'}
 
     # simulate green [test]
@@ -60,59 +60,6 @@ class TagsTest < ModelTestBase
     assert_equal [f1,f2,f3], visible_files.keys.sort
     assert_equal f1_content, visible_files[f1]
     assert_equal f2_content, visible_files[f2]
-  end
-
-  #- - - - - - - - - - - - - - - - - - -
-
-  test 'tag.diff' do
-    kata = make_kata
-    lion = kata.start_avatar(['lion'])
-    fake_three_tests(lion)
-    manifest = JSON.unparse({
-      'hiker.c' => '#include "hiker.h"',
-      'hiker.h' => '#ifndef HIKER_INCLUDED_H\n#endif',
-      'output' => 'unterminated conditional directive'
-    })
-    filename = 'manifest.json'
-    git.spy(lion.dir.path,'show',"#{3}:#{filename}",manifest)
-    stub_diff = [
-      "diff --git a/sandbox/hiker.h b/sandbox/hiker.h",
-      "index e69de29..f28d463 100644",
-      "--- a/sandbox/hiker.h",
-      "+++ b/sandbox/hiker.h",
-      "@@ -1 +1,2 @@",
-      "-#ifndef HIKER_INCLUDED",
-      "\\ No newline at end of file",
-      "+#ifndef HIKER_INCLUDED_H",
-      "+#endif",
-      "\\ No newline at end of file"
-    ].join("\n")
-    git.spy(lion.dir.path,
-      'diff',
-      '--ignore-space-at-eol --find-copies-harder 2 3 sandbox',
-      stub_diff)
-
-    tags = lion.tags
-    actual = tags[2].diff(3)
-    expected =
-    {
-      "hiker.h" =>
-      [
-        { :type => :section, :index => 0 },
-        { :type => :deleted, :line => "#ifndef HIKER_INCLUDED", :number => 1 },
-        { :type => :added,   :line => "#ifndef HIKER_INCLUDED_H", :number => 1 },
-        { :type => :added,   :line => "#endif", :number => 2 }
-      ],
-      "hiker.c" =>
-      [
-        { :line => "#include \"hiker.h\"", :type => :same, :number => 1 }
-      ],
-      "output" =>
-      [
-        { :line => "unterminated conditional directive", :type => :same, :number => 1 }
-      ]
-    }
-    assert_equal expected, actual
   end
 
   #- - - - - - - - - - - - - - - - - - -

@@ -1,3 +1,4 @@
+# comments at end of file
 
 class Avatar
 
@@ -15,13 +16,10 @@ class Avatar
   def start
     dir.make
     setup_git_repo
-
     write_manifest(kata.visible_files)
-    git_add(manifest_filename)
-    
+    git(:add, manifest_filename)
     write_increments([ ])
-    git_add(increments_filename)    
-    
+    git(:add, increments_filename)     
     sandbox.start
     commit(0)    
   end
@@ -35,7 +33,7 @@ class Avatar
   end
 
   def tags
-    (0..increments.length).map{ |n| Tag.new(self,n) }
+    Tags.new(self)
   end
 
   def lights
@@ -61,6 +59,13 @@ class Avatar
     [rags,new_files,filenames_to_delete]
   end
 
+  def diff(n,m)
+    command = "--ignore-space-at-eol --find-copies-harder #{n} #{m} sandbox"
+    diff_lines = git(:diff, command)
+    visible_files = tags[m].visible_files
+    git_diff(diff_lines, visible_files)
+  end
+
   def sandbox
     Sandbox.new(self)
   end
@@ -69,12 +74,13 @@ private
 
   include ExternalDiskDir
   include ExternalGit
+  include GitDiff
   include TimeNow
 
   def commit(tag)
-    git_commit("-a -m '#{tag}' --quiet")
-    git_gc('--auto --quiet')
-    git_tag("-m '#{tag}' #{tag} HEAD")
+    git(:commit, "-a -m '#{tag}' --quiet")
+    git(:gc, '--auto --quiet')
+    git(:tag, "-m '#{tag}' #{tag} HEAD")
   end
 
   def write_manifest(visible_files)
@@ -106,9 +112,9 @@ private
   end
 
   def setup_git_repo
-    git_init('--quiet')    
-    git_config(user_name)
-    git_config(user_email)
+    git(:init, '--quiet')    
+    git(:config, user_name)
+    git(:config, user_email)
   end
 
   def user_name
@@ -147,61 +153,4 @@ end
 
 
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# tags
-# lights
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# When a new avatar enters a dojo, kata.start_avatar()
-# will do a 'git commit' + 'git tag' for tag 0 (Zero).
-# This initial tag is *not* recorded in the
-# increments.json file which starts as [ ]
-#
-# All subsequent 'git commit' + 'git tag' commands
-# correspond to a gui action and store an entry in
-# the increments.json file.
-# eg
-# [
-#   {
-#     'colour' => 'red',
-#     'time' => [2014, 2, 15, 8, 54, 6],
-#     'number' => 1
-#   },
-# ]
-#
-# At the moment the only gui action that creates an
-# increments.json file entry is a [test] event.
-#
-# However, I may create finer grained tags than
-# just [test] events...
-#    o) creating a new file
-#    o) renaming a file
-#    o) deleting a file
-#    o) editing a file (and opening a different file)
-#
-# If this happens the difference between a Tag.new
-# and a Light.new will be more pronounced and I will
-# need something like this (where non test events
-# will have a new non red/amber/green colour) ...
-#
-# def lights
-#   rag = ['red','amber','green']
-#   increments.select{ |inc|
-#     rag.include?(inc.colour)
-#   }.map { |inc|
-#     Light.new(self,inc)
-#   }
-# end
-#
-# ------------------------------------------------------
-# Invariants
-#
-# If the latest tag is N then increments.length == N
-#
-# The inclusive upper bound for n in avatar.tags[n] is
-# always the current length of increments.json (even if
-# that is zero) which is also the latest tag number.
-#
-# The inclusive lower bound for n in avatar.tags[n] is
-# zero. When an animal does a diff of [1] what is run is
-#   avatar.tags[was_tag=0].diff(now_tag=1)
-#
+

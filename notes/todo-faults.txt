@@ -1,5 +1,5 @@
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 HISTORY-DIALOG
   loses the cursor sometimes. Appears on the projector but
   not on the laptop?! 

@@ -1,3 +1,4 @@
+# comments at end of file
 
 class Language
 
@@ -105,8 +106,11 @@ private
   def manifest
     begin
       @manifest ||= JSON.parse(read(manifest_filename))
-    rescue
-      raise "JSON.parse(#{manifest_filename}) exception from language:" + path
+    rescue Exception => e
+      message =  "JSON.parse(#{manifest_filename}) exception" +
+        " from language: " + path + "\n" +
+        "exception: " + e.message
+      raise message
     end
   end
 
