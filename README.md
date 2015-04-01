@@ -8,3 +8,6 @@
   * in a cyber-dojo you [practice](http://jonjagger.blogspot.co.uk/2013/10/practice.html) by going <em>slower</em> and focusing on [improving](http://jonjagger.blogspot.co.uk/2014/02/improving.html) rather than finishing
   * [tell me how to use cyber-dojo](http://blog.cyber-dojo.org/2014/08/getting-started.html)
   * [learn more](http://blog.cyber-dojo.org/p/learn-more.html)
+
+
+[![Join the chat at https://gitter.im/jstjohn/cyber-dojo](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jstjohn/cyber-dojo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
